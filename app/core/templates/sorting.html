@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+    <section class="head">Sorting Visualizer</section>
+    <section class="data-container"></section> 
+   
+    <!-- "Generate New Array" button -->
+    <button  class="btn1" onclick="generateBarGraph()" id="Button1" >Generate New Array</button>   
+  
+    <!-- "Selection Sort" button -->
+    <button class="btn2" onclick="SelectionSort(),disableButtons()" id="Button2" >Selection Sort</button>
+
+    <!-- "Bubble Sort" button -->
+    <button class="btn2" onclick="BubbleSort(),disableButtons()" id="Button3" >Bubble Sort</button>
+
+    <!-- "Insertion Sort" button -->
+    <button class="btn2" onclick="InsertionSort(),disableButtons()" id="Button4" >Insertion Sort</button>
+
+    <!-- "Merge Sort" button -->
+    <button class="btn2" onclick="MergeSort(),disableButtons()" id="Button5" >Merge Sort</button>
+
+    <!-- "Quick Sort" button -->
+    <button class="btn2" onclick="QuickSort(),disableButtons()" id="Button6" >Quick Sort</button>
+
+    <script src="{% static 'js/visualizer_script.js' %}"></script>
+{% endblock content %}
