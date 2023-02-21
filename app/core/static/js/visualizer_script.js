@@ -3,7 +3,7 @@ const container = document.querySelector(".data-container");
 // Call "generatebars" function
 generatebars();
 // set to store different button types
-let buttonSet = new Set(["Button1", "Button2", "Button3", "Button4", "Button5", "Button6"]);
+let buttonSet = new Set(["Button1", "Button2", "Button3", "Button4", "Button5", "Button6", "Button7"]);
 
 /*
 ###############################################################################
@@ -15,7 +15,7 @@ let buttonSet = new Set(["Button1", "Button2", "Button3", "Button4", "Button5", 
 
 
 // function to generate bars
-function generatebars(num = 100) {
+function generatebars(num = 50) {
     
   //for loop to generate 20 bars
   for (let i = 0; i < num; i += 1) {
@@ -30,10 +30,10 @@ function generatebars(num = 100) {
     bar.classList.add("bar");
   
     // Provide height to the bar
-    bar.style.height = `${value * 3}px`;
+    bar.style.height = `${(value * 3)+20}px`;
   
     // Translate the bar towards positive X axis 
-    bar.style.transform = `translateX(${i * 10}px)`;
+    bar.style.transform = `translateX(${i * 30}px)`;
       
     // To create element "label"
     const barLabel = document.createElement("label");
@@ -74,6 +74,12 @@ function enableButtons()
 function generateBarGraph()
 {
   window.location.reload();
+}
+
+/* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+function showDropdown() {
+  document.getElementById("myDropdown").classList.toggle("show");
 }
 
 /*
@@ -356,6 +362,65 @@ async function QuickSort() {
 }
 
 // asynchronous function to perform "Heap Sort"
+async function HeapSort() {
+  let bars = document.querySelectorAll(".bar");
+  var barsArr = Array.prototype.slice.call(bars);
+  sort(barsArr);
+  enableButtons();
+
+  function swap(arr, i, j) {
+    var temp1 = arr[i].style.height;
+    var temp2 = arr[i].childNodes[0].innerText;
+    arr[i].style.height = arr[j].style.height;
+    arr[i].childNodes[0].innerText = arr[j].childNodes[0].innerText;
+    arr[j].style.height = temp1;
+    arr[j].childNodes[0].innerText = temp2;
+  }
+
+  function sort(arr) {
+    var length = arr.length;
+
+    for(var i=Math.floor(length/2)-1; i >= 0; i--) {
+      heapify(arr, length, i);
+    }
+
+    for (var i=length-1; i > 0; i--) {
+      swap(arr, 0, i);
+      heapify(arr, i, 0);
+    }
+  }
+
+  function heapify(arr, arrSize, arrIndex) {
+    var largest = arrIndex;
+    var left = 2*arrIndex+1;
+    var right = 2*arrIndex+2;
+
+    console.log(arr[left]);
+    console.log(arr[largest]);
+    console.log(arr[right]);
+
+    var comparerLeft = parseInt(arr[left].childNodes[0].innerHTML);
+    var comparerLargest = parseInt(arr[largest].childNodes[0].innerHTML);
+    var comparerRight = parseInt(arr[right].childNodes[0].innerHTML);
+
+    if (left < arrSize && comparerLeft > comparerLargest) {
+      largest = left;
+    }
+
+    comparerLargest = parseInt(arr[largest].childNodes[0].innerHTML);
+    if (right < arrSize && comparerRight > comparerLargest) {
+      largest = right;
+    }
+
+    if (largest != arrIndex) {
+      swap(arr, arrIndex, largest);
+      heapify(arr, arrSize, largest);
+    }
+
+  }
+
+}
+
 // asynchronous function to perform "Counting Sort"
 // asynchronous function to perform "Radix Sort"
 // asynchronous function to perform "Bucket Sort Sort"
