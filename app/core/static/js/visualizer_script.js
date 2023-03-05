@@ -13,15 +13,22 @@ let buttonSet = new Set(["Button1", "Button2", "Button3", "Button4", "Button5", 
 ###############################################################################
 */
 
+function resizeGraph() {
+  const bars = container.getElementsByTagName("div")
+  for (let i = 0; i < bars.length; i += 1) {
+    bars[i].style.transform = `translatex(${parseInt(getComputedStyle(container).width)/101*i}px)`;
+  }
+}
+
 
 // function to generate bars
-function generatebars(num = 50) {
+function generatebars(num = 100) {
     
   //for loop to generate 20 bars
   for (let i = 0; i < num; i += 1) {
   
     // To generate random values from 1 to 100
-    const value = Math.floor(Math.random() * 100) + 1; 
+    const value = Math.floor(Math.random() * 99) + 1; 
       
     // To create element "div"
     const bar = document.createElement("div");
@@ -30,11 +37,11 @@ function generatebars(num = 50) {
     bar.classList.add("bar");
   
     // Provide height to the bar
-    bar.style.height = `${(value * 3)+20}px`;
-  
+    bar.style.height = `${value}%`;  
+
     // Translate the bar towards positive X axis 
-    bar.style.transform = `translateX(${i * 30}px)`;
-      
+    bar.style.transform = `translateX(${parseInt(getComputedStyle(container).width)/101*i}px)`;
+    
     // To create element "label"
     const barLabel = document.createElement("label");
   
@@ -74,12 +81,6 @@ function enableButtons()
 function generateBarGraph()
 {
   window.location.reload();
-}
-
-/* When the user clicks on the button,
-toggle between hiding and showing the dropdown content */
-function showDropdown() {
-  document.getElementById("myDropdown").classList.toggle("show");
 }
 
 /*
@@ -229,6 +230,7 @@ async function InsertionSort() {
 }
 
 // asynchronous function to perform "Merge Sort"
+//TODO neec to fix
 async function MergeSort() {
   let bars = document.querySelectorAll(".bar");
   var barsArr = Array.prototype.slice.call(bars);
@@ -320,6 +322,7 @@ async function MergeSort() {
 }
 
 // asynchronous function to perform "Quick Sort"
+//TODO fix enable buttons
 async function QuickSort() {
 
   let bars = document.querySelectorAll(".bar");
@@ -352,7 +355,12 @@ async function QuickSort() {
     swap(arr, smallIndex+1, high);
     return (smallIndex+1);
   }
-  function quicksort(arr, low, high) {
+  async function quicksort(arr, low, high) {
+    await new Promise((resolve) =>
+        setTimeout(() => {
+          resolve();
+        }, 500)
+    );
     if (low < high) {
       var partitionIndex = partition(arr, low, high);
       quicksort(arr, low, partitionIndex-1);
@@ -362,6 +370,7 @@ async function QuickSort() {
 }
 
 // asynchronous function to perform "Heap Sort"
+//TODO need to fix see console logs
 async function HeapSort() {
   let bars = document.querySelectorAll(".bar");
   var barsArr = Array.prototype.slice.call(bars);
