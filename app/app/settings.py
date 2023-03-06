@@ -88,6 +88,13 @@ DATABASES = {
         'USER': os.environ.get('DB_USER'),
         'PASSWORD': os.environ.get('DB_PASS'),
     }
+    'test': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'HOST': postgres,
+        'NAME': 'postgres',
+        'USER': 'user',
+        'PASSWORD': 'admin',
+    }
 }
 
 

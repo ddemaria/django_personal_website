@@ -37,7 +37,6 @@ body {
     border: 5px solid;
     position: relative;
     text-align: center;
-    padding-left: 2%;
 }
   
 .bar {
@@ -68,6 +67,7 @@ body {
     border: white;
 }
 .btn2 {
+    position: relative;
     padding: 12px;
     font-weight: bolder;
     background-color: #6f459e;

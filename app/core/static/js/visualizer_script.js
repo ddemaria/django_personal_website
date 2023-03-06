@@ -322,8 +322,8 @@ async function MergeSort() {
 }
 
 // asynchronous function to perform "Quick Sort"
-//TODO fix enable buttons
-async function QuickSort() {
+//TODO fix enable buttons has something to do with recursion
+function QuickSort() {
 
   let bars = document.querySelectorAll(".bar");
   var barsArr = Array.prototype.slice.call(bars);
@@ -355,12 +355,7 @@ async function QuickSort() {
     swap(arr, smallIndex+1, high);
     return (smallIndex+1);
   }
-  async function quicksort(arr, low, high) {
-    await new Promise((resolve) =>
-        setTimeout(() => {
-          resolve();
-        }, 500)
-    );
+  function quicksort(arr, low, high) {
     if (low < high) {
       var partitionIndex = partition(arr, low, high);
       quicksort(arr, low, partitionIndex-1);
