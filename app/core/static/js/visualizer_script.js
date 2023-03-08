@@ -231,14 +231,23 @@ async function InsertionSort() {
 
 // asynchronous function to perform "Merge Sort"
 //TODO neec to fix
-async function MergeSort() {
+function MergeSort() {
   let bars = document.querySelectorAll(".bar");
   var barsArr = Array.prototype.slice.call(bars);
+  mergesort(barsArr, 0, barsArr.length-1);
+  enableButtons();
+
+  function swap(arr, i, j) {
+    var temp1 = arr[i].style.height;
+    var temp2 = arr[i].childNodes[0].innerText;
+    arr[i].style.height = arr[j].style.height;
+    arr[i].childNodes[0].innerText = arr[j].childNodes[0].innerText;
+    arr[j].style.height = temp1;
+    arr[j].childNodes[0].innerText = temp2;
+  }
 
   function merge(arr, left, mid, right) {
-    arr[mid].style.backgroundColor = "darkblue";
-    arr[right].style.backgroundColor = "red";
-    //arr[left].style.backgroundColor = "purple";
+
     var leftArrLength = mid - left + 1;
     var rightArrLength = right - mid;
 
@@ -252,52 +261,39 @@ async function MergeSort() {
       rightArray[i] = arr[mid+1+i];
     }
 
+    // Initial index of left sub array
     var leftSubIndex = 0;
+
+    // Initial index of right sub array
     var rightSubIndex = 0;
+
+    // Initial index of merged sub array
     var mergeSubIndex = 1;
 
+    // While index of each sub array are less than the size
     while (leftSubIndex < leftArrLength && rightSubIndex < rightArrLength) {
+      // Get actual values for bar sizes
       var comparer1 = parseInt(leftArray[leftSubIndex].childNodes[0].innerHTML);
       var comparer2 = parseInt(rightArray[rightSubIndex].childNodes[0].innerHTML);
       if (comparer1 <= comparer2) {
-        var temp1 = arr[mergeSubIndex].style.height;
-        var temp2 = arr[mergeSubIndex].childNodes[0].innerText;
-        arr[mergeSubIndex].style.height = leftArray[leftSubIndex].style.height;
-        leftArray[leftSubIndex].style.height = temp1;
-        arr[mergeSubIndex].childNodes[0].innerText = leftArray[leftSubIndex].childNodes[0].innerText;
-        leftArray[leftSubIndex].childNodes[0].innerText = temp2;
+        swap(arr, mergeSubIndex, leftSubIndex)
         leftSubIndex++;
       }
       else {
-        var temp1 = arr[mergeSubIndex].style.height;
-        var temp2 = arr[mergeSubIndex].childNodes[0].innerText;
-        arr[mergeSubIndex].style.height = rightArray[rightSubIndex].style.height;
-        rightArray[rightSubIndex].style.height = temp1;
-        arr[mergeSubIndex].childNodes[0].innerText = rightArray[rightSubIndex].childNodes[0].innerText;
-        rightArray[rightSubIndex].childNodes[0].innerText = temp2;
+        swap(arr, mergeSubIndex, rightSubIndex)
         rightSubIndex++
       }
       mergeSubIndex++;
     }
 
     while (leftSubIndex < leftArrLength) {
-      var temp1 = arr[mergeSubIndex].style.height;
-      var temp2 = arr[mergeSubIndex].childNodes[0].innerText;
-      arr[mergeSubIndex].style.height = leftArray[leftSubIndex].style.height;
-      leftArray[leftSubIndex].style.height = temp1;
-      arr[mergeSubIndex].childNodes[0].innerText = leftArray[leftSubIndex].childNodes[0].innerText;
-      leftArray[leftSubIndex].childNodes[0].innerText = temp2;
+      swap(arr, mergeSubIndex, leftSubIndex)
       leftSubIndex++;
       mergeSubIndex++;
     }
 
     while(rightSubIndex < rightArrLength) {
-      var temp1 = arr[mergeSubIndex].style.height;
-      var temp2 = arr[mergeSubIndex].childNodes[0].innerText;
-      arr[mergeSubIndex].style.height = rightArray[rightSubIndex].style.height;
-      rightArray[rightSubIndex].style.height = temp1;
-      arr[mergeSubIndex].childNodes[0].innerText = rightArray[rightSubIndex].childNodes[0].innerText;
-      rightArray[rightSubIndex].childNodes[0].innerText = temp2;
+      swap(arr, mergeSubIndex, rightSubIndex)
       rightSubIndex++;
       mergeSubIndex++;
     }
@@ -308,17 +304,14 @@ async function MergeSort() {
     if (left >= right) {
       return;
     }
-    // calculate the midpoint of the array
+    // Calculate the midpoint of the array
     var mid = left + parseInt((right-1)/2)
-    // use recursion passing the mid as the right
+    // Use recursion passing the mid as the right
     mergesort(arr, left, mid);
-    // use recusion passing the mid+1 as the left
+    // Use recusion passing the mid+1 as the left
     mergesort(arr, mid+1, right);
     merge(arr, left, mid, right);
   }
-
-  mergesort(barsArr, 0, barsArr.length-1);
-  enableButtons();
 }
 
 // asynchronous function to perform "Quick Sort"
@@ -339,6 +332,7 @@ function QuickSort() {
     arr[j].style.height = temp1;
     arr[j].childNodes[0].innerText = temp2;
   }
+
   function partition(arr, low, high) {
     // To store the integer value of jth bar to var1 
     var pivot = parseInt(arr[high].childNodes[0].innerHTML);
@@ -355,6 +349,7 @@ function QuickSort() {
     swap(arr, smallIndex+1, high);
     return (smallIndex+1);
   }
+
   function quicksort(arr, low, high) {
     if (low < high) {
       var partitionIndex = partition(arr, low, high);

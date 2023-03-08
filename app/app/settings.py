@@ -87,10 +87,10 @@ DATABASES = {
         'NAME': os.environ.get('DB_NAME'),
         'USER': os.environ.get('DB_USER'),
         'PASSWORD': os.environ.get('DB_PASS'),
-    }
+    },
     'test': {
         'ENGINE': 'django.db.backends.postgresql',
-        'HOST': postgres,
+        'HOST': '127.0.0.1',
         'NAME': 'postgres',
         'USER': 'user',
         'PASSWORD': 'admin',
