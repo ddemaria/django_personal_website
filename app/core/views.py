@@ -1,10 +1,17 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
+from django.db import connections
+from django.conf import settings
 
-def home(render):
+def home(request):
     template = loader.get_template('home.html')
-    return HttpResponse(template.render())
+    with connections['nlp_data'].cursor() as cursor:
+        cursor.execute("SELECT tweet_object_text FROM twitter_mining_data")
+        data = cursor.fetchall()
+    for item in data:
+        print(item)
+    return render(request, "home.html")
 
 def about(render):
     template = loader.get_template('about.html')

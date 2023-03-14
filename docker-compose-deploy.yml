@@ -14,6 +14,12 @@ services:
       - DB_PASS=${DB_PASS}
       - SECRET_KEY=${SECRET_KEY}
       - ALLOWED_HOSTS=${ALLOWED_HOSTS}
+      - NLP_SECRET_KEY=devsecretkey
+      - NLP_DB_HOST=putiphere
+      - NLP_DB_NAME=${NLP_DB_NAME}
+      - NLP_DB_USER=${NLP_DB_USER}
+      - NLP_DB_PASS=${NLP_DB_PASS}
+      - NLP_ALLOWED_HOSTS=${NLP_ALLOWED_HOSTS}
     depends_on:
       - db
 
@@ -27,6 +33,9 @@ services:
       - POSTGRES_DB=${DB_NAME}
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASS}
+      - NLP_POSTGRES_DB=${NLP_DB_NAME}
+      - NLP_POSTGRES_USER=${NLP_DB_USER}
+      - NLP_POSTGRES_PASSWORD=${NLP_DB_PASS}
 
   proxy:
     build:
