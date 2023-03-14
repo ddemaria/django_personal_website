@@ -20,6 +20,7 @@ services:
   db:
     image: postgres:13-alpine
     restart: always
+    user: jenkins
     volumes:
       - postgres-data:/var/lib/postgresql/data
     environment:
