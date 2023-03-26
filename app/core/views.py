@@ -5,13 +5,18 @@ from django.db import connections
 from django.conf import settings
 
 def home(request):
-    template = loader.get_template('home.html')
+    data = []
     with connections['nlp_data'].cursor() as cursor:
         cursor.execute("SELECT tweet_object_text FROM twitter_mining_data")
         data = cursor.fetchall()
     for item in data:
         print(item)
-    return render(request, "home.html")
+        break
+    context = {
+        "tweet_text_dict": data
+    }
+    template_name = 'home.html'
+    return render(request, template_name, context)
 
 def about(render):
     template = loader.get_template('about.html')

@@ -1,4 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 HOME
+{% for value in tweet_text_dict %}
+    {{ value }}
+{% endfor %}
 {% endblock content %}
