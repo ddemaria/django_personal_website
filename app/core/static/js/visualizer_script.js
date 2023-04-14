@@ -3,13 +3,41 @@ const container = document.querySelector(".data-container");
 // Call "generatebars" function
 generatebars();
 // set to store different button types
-let buttonSet = new Set(["Button1", "Button2", "Button3", "Button4", "Button5", "Button6", "Button7"]);
+let buttonSet = new Set([
+  "Button1", 
+  "Button2", 
+  "Button3", 
+  "Button4", 
+  "Button5", 
+  "Button6", 
+  "Button7",
+  "Button8",
+  "Button9",
+  "Button10",
+  "Button11",
+  "Button12",
+  "Button13",
+  "Button14",
+  "Button15",
+  "Button16",
+  "Button17",
+  "Button18",
+  "Button19",
+  "Button20",
+  "Button21",
+  "Button22",
+  "Button23",
+  "Button24",
+  "Button25",
+  "Button26",
+  "Button27",
+  "Button28",
+  "Button29",
+]);
 
 /*
 ###############################################################################
     Helper Functions:
-      - 'generatebars': generate the graph
-      - 'disable': disable button after click
 ###############################################################################
 */
 
@@ -86,14 +114,17 @@ function generateBarGraph()
 /*
 ###############################################################################
     Sorting Algorithm Functions:
-      - 'SelectionSort':
-      - 'BubbleSort':
-      - 'InsertionSort':
-      - 'MergeSort':
-      - 'QuickSort':
-      -
 ###############################################################################
 */
+
+function swap(arr, i, j) {
+  var temp1 = arr[i].style.height;
+  var temp2 = arr[i].childNodes[0].innerText;
+  arr[i].style.height = arr[j].style.height;
+  arr[i].childNodes[0].innerText = arr[j].childNodes[0].innerText;
+  arr[j].style.height = temp1;
+  arr[j].childNodes[0].innerText = temp2;
+}
 
 // asynchronous function to perform "Selection Sort"
 async function SelectionSort() {
@@ -230,87 +261,70 @@ async function InsertionSort() {
 }
 
 // asynchronous function to perform "Merge Sort"
-//TODO neec to fix
 function MergeSort() {
-  let bars = document.querySelectorAll(".bar");
-  var barsArr = Array.prototype.slice.call(bars);
-  mergesort(barsArr, 0, barsArr.length-1);
+  // Define a global variable to hold the sorted array
+  let sortedArray = [];
+  // Get the array to sort from the HTML bar graph
+  const bars = document.getElementsByClassName("bar");
+  // Convert the HTML bar graph to an array of numbers
+  const arrayToSort = Array.from(bars).map(bar => parseInt(bar.style.height));
+  // Call the merge sort algorithm on the array
+  mergeSort(arrayToSort, 0, arrayToSort.length - 1);
+  // Animate the sorted array on the HTML bar graph
+  animateSort(sortedArray);
   enableButtons();
 
-  function swap(arr, i, j) {
-    var temp1 = arr[i].style.height;
-    var temp2 = arr[i].childNodes[0].innerText;
-    arr[i].style.height = arr[j].style.height;
-    arr[i].childNodes[0].innerText = arr[j].childNodes[0].innerText;
-    arr[j].style.height = temp1;
-    arr[j].childNodes[0].innerText = temp2;
+  // Define the merge sort algorithm
+  function mergeSort(array, start, end) {
+    if (start < end) {
+      const middle = Math.floor((start + end) / 2);
+      mergeSort(array, start, middle);
+      mergeSort(array, middle + 1, end);
+      merge(array, start, middle, end);
+    }
   }
 
-  function merge(arr, left, mid, right) {
-
-    var leftArrLength = mid - left + 1;
-    var rightArrLength = right - mid;
-
-    var leftArray = new Array(leftArrLength);
-    var rightArray = new Array(rightArrLength);
-
-    for (var i = 0; i < leftArrLength; i++) {
-      leftArray[i] = arr[left+i];
-    }
-    for (var i = 0; i < rightArrLength; i++) {
-      rightArray[i] = arr[mid+1+i];
-    }
-
-    // Initial index of left sub array
-    var leftSubIndex = 0;
-
-    // Initial index of right sub array
-    var rightSubIndex = 0;
-
-    // Initial index of merged sub array
-    var mergeSubIndex = 1;
-
-    // While index of each sub array are less than the size
-    while (leftSubIndex < leftArrLength && rightSubIndex < rightArrLength) {
-      // Get actual values for bar sizes
-      var comparer1 = parseInt(leftArray[leftSubIndex].childNodes[0].innerHTML);
-      var comparer2 = parseInt(rightArray[rightSubIndex].childNodes[0].innerHTML);
-      if (comparer1 <= comparer2) {
-        swap(arr, mergeSubIndex, leftSubIndex)
-        leftSubIndex++;
+  // Define the merge function to merge two sorted arrays
+  function merge(array, start, middle, end) {
+    const leftArray = array.slice(start, middle + 1);
+    const rightArray = array.slice(middle + 1, end + 1);
+    let leftIndex = 0;
+    let rightIndex = 0;
+    let arrayIndex = start;
+    while (leftIndex < leftArray.length && rightIndex < rightArray.length) {
+      if (leftArray[leftIndex] <= rightArray[rightIndex]) {
+        array[arrayIndex] = leftArray[leftIndex];
+        leftIndex++;
+      } else {
+        array[arrayIndex] = rightArray[rightIndex];
+        rightIndex++;
       }
-      else {
-        swap(arr, mergeSubIndex, rightSubIndex)
-        rightSubIndex++
-      }
-      mergeSubIndex++;
+      arrayIndex++;
     }
-
-    while (leftSubIndex < leftArrLength) {
-      swap(arr, mergeSubIndex, leftSubIndex)
-      leftSubIndex++;
-      mergeSubIndex++;
+    while (leftIndex < leftArray.length) {
+      array[arrayIndex] = leftArray[leftIndex];
+      leftIndex++;
+      arrayIndex++;
     }
-
-    while(rightSubIndex < rightArrLength) {
-      swap(arr, mergeSubIndex, rightSubIndex)
-      rightSubIndex++;
-      mergeSubIndex++;
+    while (rightIndex < rightArray.length) {
+      array[arrayIndex] = rightArray[rightIndex];
+      rightIndex++;
+      arrayIndex++;
     }
-
+    // Save the sorted array in the global variable
+    sortedArray = array.slice();
   }
 
-  function mergesort(arr, left, right) {
-    if (left >= right) {
-      return;
+  // Define a function to animate the sorted array on the HTML bar graph
+  function animateSort(array) {
+    const bars = document.getElementsByClassName("bar");
+    for (let i = 0; i < array.length; i++) {
+      const heightPercentage = (array[i] / 100) * 100;
+      setTimeout(() => {
+        bars[i].style.height = `${heightPercentage}%`;
+      }, i * 50);
     }
-    // Calculate the midpoint of the array
-    var mid = left + parseInt((right-1)/2)
-    // Use recursion passing the mid as the right
-    mergesort(arr, left, mid);
-    // Use recusion passing the mid+1 as the left
-    mergesort(arr, mid+1, right);
-    merge(arr, left, mid, right);
+    return;
   }
 }
 
@@ -360,88 +374,97 @@ function QuickSort() {
 }
 
 // asynchronous function to perform "Heap Sort"
-//TODO need to fix see console logs
 async function HeapSort() {
-  let bars = document.querySelectorAll(".bar");
-  var barsArr = Array.prototype.slice.call(bars);
-  sort(barsArr);
-  enableButtons();
-
-  function swap(arr, i, j) {
-    var temp1 = arr[i].style.height;
-    var temp2 = arr[i].childNodes[0].innerText;
-    arr[i].style.height = arr[j].style.height;
-    arr[i].childNodes[0].innerText = arr[j].childNodes[0].innerText;
-    arr[j].style.height = temp1;
-    arr[j].childNodes[0].innerText = temp2;
-  }
-
-  function sort(arr) {
-    var length = arr.length;
-
-    for(var i=Math.floor(length/2)-1; i >= 0; i--) {
-      heapify(arr, length, i);
-    }
-
-    for (var i=length-1; i > 0; i--) {
-      swap(arr, 0, i);
-      heapify(arr, i, 0);
-    }
-  }
-
-  function heapify(arr, arrSize, arrIndex) {
-    var largest = arrIndex;
-    var left = 2*arrIndex+1;
-    var right = 2*arrIndex+2;
-
-    console.log(arr[left]);
-    console.log(arr[largest]);
-    console.log(arr[right]);
-
-    var comparerLeft = parseInt(arr[left].childNodes[0].innerHTML);
-    var comparerLargest = parseInt(arr[largest].childNodes[0].innerHTML);
-    var comparerRight = parseInt(arr[right].childNodes[0].innerHTML);
-
-    if (left < arrSize && comparerLeft > comparerLargest) {
-      largest = left;
-    }
-
-    comparerLargest = parseInt(arr[largest].childNodes[0].innerHTML);
-    if (right < arrSize && comparerRight > comparerLargest) {
-      largest = right;
-    }
-
-    if (largest != arrIndex) {
-      swap(arr, arrIndex, largest);
-      heapify(arr, arrSize, largest);
-    }
-
-  }
-
 }
 
 // asynchronous function to perform "Counting Sort"
+function CountingSort() {
+}
+
 // asynchronous function to perform "Radix Sort"
-// asynchronous function to perform "Bucket Sort Sort"
-// asynchronous function to perform "Bingo Sort Sort"
+function RadixSort() {
+}
+
+// asynchronous function to perform "Bucket Sort"
+function BucketSort() {
+}
+
+// asynchronous function to perform "Bingo Sort"
+function BingoSort() {
+}
+
 // asynchronous function to perform "Shell Sort"
+function ShellSort() {
+}
+
 // asynchronous function to perform "Tim Sort"
+function TimSort() {
+}
+
 // asynchronous function to perform "Comb Sort"
+function CombSort() {
+}
+
 // asynchronous function to perform "Pigeonhole Sort"
+function PigeonholeSort() {
+}
+
 // asynchronous function to perform "Cycle Sort"
+function CycleSort() {
+}
+
 // asynchronous function to perform "Coctail Sort"
+function CoctailSort() {
+}
+
 // asynchronous function to perform "Strand Sort"
+function StrandSort() {
+}
+
 // asynchronous function to perform "Bitonic Sort"
+function BitonicSort() {
+}
+
 // asynchronous function to perform "Pancake Sort"
+function PancakeSort() {
+}
+
 // asynchronous function to perform "Permutation Sort"
+function PermutationSort() {
+}
+
 // asynchronous function to perform "Gnome Sort"
+function GnomeSort() {
+}
+
 // asynchronous function to perform "Sleep Sort"
+function SleepSort() {
+}
+
 // asynchronous function to perform "Structure Sort"
+function StructureSort() {
+}
+
 // asynchronous function to perform "Stooge Sort"
+function StoogeSort() {
+}
+
 // asynchronous function to perform "Tag Sort"
+function TagSort() {
+}
+
 // asynchronous function to perform "Tree Sort"
+function TreeSort() {
+}
+
 // asynchronous function to perform "Brick Sort"
+function BrickSort() {
+}
+
 // asynchronous function to perform "3-Way Merge Sort"
+function ThreeWayMergeSort() {
+}
+
 
 /*
 ###############################################################################

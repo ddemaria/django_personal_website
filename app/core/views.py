@@ -5,15 +5,15 @@ from django.db import connections
 from django.conf import settings
 
 def home(request):
-    data = []
-    with connections['nlp_data'].cursor() as cursor:
-        cursor.execute("SELECT tweet_object_text FROM twitter_mining_data")
-        data = cursor.fetchall()
-    for item in data:
-        print(item)
-        break
+    # data = []
+    # with connections['nlp_data'].cursor() as cursor:
+    #     cursor.execute("SELECT tweet_object_text FROM twitter_mining_data")
+    #     data = cursor.fetchall()
+    # for item in data:
+    #     print(item)
+    #     break
     context = {
-        "tweet_text_dict": data
+        # "tweet_text_dict": data
     }
     template_name = 'home.html'
     return render(request, template_name, context)

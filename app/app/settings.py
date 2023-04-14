@@ -88,13 +88,13 @@ DATABASES = {
         'USER': os.environ.get('DB_USER'),
         'PASSWORD': os.environ.get('DB_PASS')
     },
-    'nlp_data': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'HOST': os.environ.get('NLP_DB_HOST'),
-        'NAME': os.environ.get('NLP_DB_NAME'),
-        'USER': os.environ.get('NLP_DB_USER'),
-        'PASSWORD': os.environ.get('NLP_DB_PASS')
-    }
+    # 'nlp_data': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'HOST': os.environ.get('NLP_DB_HOST'),
+    #     'NAME': os.environ.get('NLP_DB_NAME'),
+    #     'USER': os.environ.get('NLP_DB_USER'),
+    #     'PASSWORD': os.environ.get('NLP_DB_PASS')
+    # }
 }
 
 
