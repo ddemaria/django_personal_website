@@ -1,7 +1,9 @@
 // assign container to the data container
 const container = document.querySelector(".data-container");
 // Call "generatebars" function
-generatebars();
+// generatebars();
+
+var barArray = [];
 // set to store different button types
 let buttonSet = new Set([
   "Button1", 
@@ -37,6 +39,70 @@ let buttonSet = new Set([
 
 /*
 ###############################################################################
+    Class for bar:
+###############################################################################
+*/
+class Bar {
+
+  constructor(container) {
+    this.bar = document.createElement("div");
+    this.value = function () {
+      return Math.floor(Math.random() * 99) + 1;
+    };
+    this.init = function() {
+      // To create element "div"
+      //this.bar = document.createElement("div");
+      // To add class "bar" to "div"
+      this.bar.classList.add("bar");
+      // Provide height to the bar
+      this.bar.style.height = `${this.value}%`;  
+      // Translate the bar towards positive X axis 
+      this.bar.style.transform = `translateX(${parseInt(getComputedStyle(container).width)/101*i}px)`;
+      // To create element "label"
+      const barLabel = document.createElement("label");
+      // To add class "bar_id" to "label"
+      barLabel.classList.add("bar_id");
+      // Assign value to "label"
+      barLabel.innerHTML = this.value;
+      // Append "Label" to "div"
+      this.bar.appendChild(barLabel);
+      // Append "div" to "data-container div"
+      container.appendChild(this.bar);
+    };
+  }
+
+  getHeight() {
+    return this.bar.style.height;
+  }
+
+  getInnerText() {
+    return this.bar.childNodes[0].innerText;
+  }
+
+  setHeight(height) {
+    this.bar.style.height = `${height}%`;
+  }
+
+  setInnerText(innerText) {
+    this.bar.childNodes[0].innerText = innerText;
+  }
+
+}
+
+function generatebars() {
+  barArray = []
+  for (let i=0; i<100; i +=1) {
+    console.log("fuck");
+    barArray[i] = new Bar(container)
+  }
+}
+
+// Call "generatebars" function
+
+generatebars();
+
+/*
+###############################################################################
     Helper Functions:
 ###############################################################################
 */
@@ -50,7 +116,7 @@ function resizeGraph() {
 
 
 // function to generate bars
-function generatebars(num = 100) {
+function generatebars123(num = 100) {
     
   //for loop to generate 20 bars
   for (let i = 0; i < num; i += 1) {
@@ -375,6 +441,7 @@ function QuickSort() {
 
 // asynchronous function to perform "Heap Sort"
 async function HeapSort() {
+
 }
 
 // asynchronous function to perform "Counting Sort"
