@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.template import loader
 from django.db import connections
 from django.conf import settings
+from app.settings import MEDIA_URL
 
 def home(request):
     # data = []
@@ -14,6 +15,7 @@ def home(request):
     #     break
     context = {
         # "tweet_text_dict": data
+        'media': MEDIA_URL
     }
     template_name = 'home.html'
     return render(request, template_name, context)
