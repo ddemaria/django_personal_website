@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" type='text/css' href="{% static 'css/bible.css' %}">
+<div class="row">
+    <div class="col">
+        <button type="button" class="collapsible" id="btnRoot">Git Commands</button>
+        <table class="content" id="tblContent">
+            <tr>
+                <th>Command</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>git clone [source]</td>
+                <td>clones a copy of the source git repo</td>
+            </tr>
+            <tr>
+                <td>git checkout -b [branch_name]</td>
+                <td>create and switch to new branch</td>
+            </tr>
+            <tr>
+                <td>git stash push -m "[message]"</td>
+                <td>store uncommited git changes in a named stash</td>
+            </tr>
+        </table>
+        </table> 
+    </div>
+    <div class="col">
+        <button type="button" class="collapsible" id="btnRoot">Windows Commands</button>
+        <table class="content" id="tblContent">
+            <tr>
+                <th>Command</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>fc [file_1] [file_2]</td>
+                <td>compare contents of files and display non matching lines</td>
+            </tr>
+            <tr>
+                <td>sort</td>
+                <td>Take input from a source file/pipeline, sort its contents alphabetically (default: A to Z; in reverse: Z to A), and display the output</td>
+            </tr>
+            <tr>
+                <td>dir /b | sort /r /o ZtoA.txt</td>
+                <td>List all file and folder names in the current working directory, sort them in reverse alphabetical order, and save the sorted output to a file ZtoA.txt</td>
+            </tr>
+        </table> 
+    </div>
+    <div class="col">
+        <button type="button" class="collapsible" id="btnRoot">Docker Commands</button>
+        <table class="content" id="tblContent">
+            <tr>
+                <th>Command</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>git stash</td>
+                <td>stash git changes</td>
+            </tr>
+        </table> 
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <button type="button" class="collapsible" id="btnRoot">Linux Commands</button>
+        <table class="content" id="tblContent">
+            <tr>
+                <th>Command</th>
+                <th>Description</th>
+            </tr>
+        </table> 
+    </div>
+    <div class="col">
+        <button type="button" class="collapsible" id="btnRoot">Linux Commands</button>
+        <table class="content" id="tblContent">
+            <tr>
+                <th>Command</th>
+                <th>Description</th>
+            </tr>
+        </table> 
+    </div>
+    <div class="col">
+        <button type="button" class="collapsible" id="btnRoot">Linux Commands</button>
+        <table class="content" id="tblContent">
+            <tr>
+                <th>Command</th>
+                <th>Description</th>
+            </tr>
+        </table> 
+    </div>
+</div>
+<script>
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+    
+    for (i = 0; i < coll.length; i++) {
+      coll[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var content = this.nextElementSibling;
+        if (content.style.display === "block") {
+          content.style.display = "none";
+        } else {
+          content.style.display = "block";
+        }
+      });
+    }
+    </script>
+{% endblock content %}

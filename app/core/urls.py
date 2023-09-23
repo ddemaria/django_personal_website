@@ -9,4 +9,5 @@ urlpatterns = [
     path('tutorials/', views.tutorials, name='tutorials'),
     path('pathfinding/', views.pathfinding, name='pathfinding'),
     path('objectrecognition/', views.objectrecognition, name='objectrecognition'),
+    path('bible/', views.bible, name='bible'),
 ]

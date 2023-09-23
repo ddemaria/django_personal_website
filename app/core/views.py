@@ -39,3 +39,7 @@ def pathfinding(render):
 def objectrecognition(render):
     template = loader.get_template('objectrecognition.html')
     return HttpResponse(template.render())
+
+def bible(render):
+    template = loader.get_template('bible.html')
+    return HttpResponse(template.render())
