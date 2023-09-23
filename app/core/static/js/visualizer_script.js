@@ -1,7 +1,7 @@
 // assign container to the data container
 const container = document.querySelector(".data-container");
-// Call "generatebars" function
-// generatebars();
+
+generateBars();
 
 var barArray = [];
 // set to store different button types
@@ -89,18 +89,6 @@ class Bar {
 
 }
 
-function generatebars() {
-  barArray = []
-  for (let i=0; i<100; i +=1) {
-    console.log("fuck");
-    barArray[i] = new Bar(container)
-  }
-}
-
-// Call "generatebars" function
-
-generatebars();
-
 /*
 ###############################################################################
     Helper Functions:
@@ -116,7 +104,7 @@ function resizeGraph() {
 
 
 // function to generate bars
-function generatebars123(num = 100) {
+function generateBars(num = 100) {
     
   //for loop to generate 20 bars
   for (let i = 0; i < num; i += 1) {

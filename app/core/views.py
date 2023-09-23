@@ -28,6 +28,14 @@ def sorting(render):
     template = loader.get_template('sorting.html')
     return HttpResponse(template.render())
 
+def tutorials(render):
+    template = loader.get_template('tutorials.html')
+    return HttpResponse(template.render())
+
 def pathfinding(render):
     template = loader.get_template('pathfinding.html')
+    return HttpResponse(template.render())
+
+def objectrecognition(render):
+    template = loader.get_template('objectrecognition.html')
     return HttpResponse(template.render())

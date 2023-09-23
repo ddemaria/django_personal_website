@@ -1,18 +1,41 @@
 {% extends 'base.html' %}
 {% block content %}
-<center>--- About Tech Guy Dave ---</center>
+{% load static %}
 <center>
-    <br>Studied computer science and mathematics at the University of South Carolina.
+    <h1>--- About Tech Guy Dave ---</h1>
+</center>
+<center>
+    <p>Studied computer science and mathematics at the University of South Carolina.
     Pursued a career as a DevSecOps engineer shortly after graduation.
-    Heavily driven toward automation in the software development lifecycle.</br>
+    Heavily driven toward automation in the software development lifecycle.</p>
 
-    <br>This website is a way for me to showcase some personal projects and tinker with
-    cutting edge technologies in the DevSecOps space.</br>
+    <p>This website is a way for me to showcase some personal projects and tinker with
+    cutting edge technologies in the DevSecOps space.</p>
 
-    <br>My focus area in software development is data aanalysis specifically in the
-    natural language processing field.</br>
+    <p>My focus area in software development is data analysis specifically in the
+    natural language processing field.</p>
 
-    <br>I have an interest in cultivating publicly available information from many sources
-    (twittet or SEC) to perform analysis and draw conclusions from.</br>
+    <p>I have an interest in cultivating publicly available information from many sources
+    (Twitter or SEC) to perform analysis and draw conclusions from.</p>
+
+    <p>
+        <h3>--- Inspirations ---</h3>
+    </p>
+    <p>
+        Terry A. Davis (Temple OS)
+    </p>
+    <p>
+        The sole developer of the operating system Temple OS.  Every line of code for this operating system 
+        was written by Terry himself.  This man is an inspiration to any software engineer looking to explore 
+        and tinker with projects.
+    </p>
+    <p>
+        Rest in peace and fly high Terry.
+    </p>
+    <p>
+        <video name='demo' controls loop width='50%' height='50%'>
+            <source src="{% static '/media/terrydavis.mp4' %}" type="video/mp4"></source>
+        </video>
+    </p>
 </center>
 {% endblock content %}
